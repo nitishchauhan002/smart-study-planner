@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+</head>
+<body>
+
+<div class="layout">
+
+
+  <aside class="sidebar">
+    <h3>📚 SMART STUDY PLANNER</h3>
+    <nav>
+      <a href="#">🏠 Dashboard</a>
+      <a href="#tasks">✅ Tasks</a>
+      <a href="#calendar">📅 Calendar</a>
+      <a href="#progress">📊 Progress</a>
+      <a href="#" id="logout">🚪 Logout</a>
+    </nav>
+  </aside>
+
+  <main class="main-content">
+
+    <section class="welcome">
+      <h2>Welcome, <span id="studentName"></span> 👋</h2>
+    </section>
+
+    <section class="cards">
+      <div class="card">Total Tasks <span id="totalTasks">0</span></div>
+      <div class="card">Completed <span id="completedTasks">0</span></div>
+      <div class="card">Pending <span id="pendingTasks">0</span></div>
+      <div class="card">Deadlines <span id="deadlines">0</span></div>
+    </section>
+
+    <section id="tasks">
+      <h3>Add Task</h3>
+      <form id="taskForm">
+        <input type="text" id="taskTitle" placeholder="Task Title">
+        <input type="text" id="taskSubject" placeholder="Subject">
+        <input type="date" id="taskDeadline">
+        <select id="taskPriority">
+          <option value="Low">Low Priority</option>
+          <option value="Medium">Medium Priority</option>
+          <option value="High">High Priority</option>
+        </select>
+        <button type="submit">Add Task</button>
+      </form>
+
+      <div id="taskList"></div>
+    </section>
+
+    <section id="calendar">
+      <h3>Calendar</h3>
+      <div id="calendarGrid"></div>
+    </section>
+
+    <section id="progress">
+      <h3>Progress</h3>
+      <div class="progress-bar">
+        <div id="progressFill"></div>
+      </div>
+      <p id="progressText">0% Completed</p>
+    </section>
+
+  </main>
+</div>
+
+</body>
+</html>

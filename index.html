@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Smart Study Planner</title>
+</head>
+<body class="auth-body">
+
+<div class="auth-container">
+  <div class="auth-card">
+
+    <h2 id="formTitle">Login</h2>
+
+    <form id="authForm">
+      <div id="nameField" class="hidden">
+        <input type="text" id="name" placeholder="Full Name">
+        <small class="error" id="nameError"></small>
+      </div>
+
+      <input type="email" id="email" placeholder="Email">
+      <small class="error" id="emailError"></small>
+
+      <input type="password" id="password" placeholder="Password">
+      <small class="error" id="passwordError"></small>
+
+      <div id="confirmField" class="hidden">
+        <input type="password" id="confirmPassword" placeholder="Confirm Password">
+        <small class="error" id="confirmError"></small>
+      </div>
+
+      <button type="submit">Continue</button>
+    </form>
+
+    <p id="toggleText">
+      Don’t have an account? <span id="toggleBtn">Register</span>
+    </p>
+
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
