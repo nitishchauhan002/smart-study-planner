@@ -1,43 +1,249 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Smart Study Planner</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Study Planner</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="auth-body">
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-brain"></i> Smart Study Planner</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-link active" data-section="dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <a href="#" class="nav-link" data-section="calendar"><i class="fas fa-calendar-alt"></i> Calendar</a>
+                <a href="#" class="nav-link" data-section="tasks"><i class="fas fa-tasks"></i> Tasks</a>
+                <a href="#" class="nav-link" data-section="progress"><i class="fas fa-chart-line"></i> Progress</a>                <a href="#" class="nav-link" data-section="about"><i class="fas fa-info-circle"></i> About Us</a>
+                <a href="#" class="nav-link" data-section="contact"><i class="fas fa-envelope"></i> Contact</a>                <!-- ADD THIS CODE - Bell Icon for Reminders -->
+                <a href="#" class="nav-link reminder-bell" id="reminder-bell">
+                    <i class="fas fa-bell"></i> 
+                    <span id="reminder-count" class="reminder-count">0</span>
+                </a>
+                <!-- END ADD -->
+            </nav>
+            <div class="sidebar-footer">
+                <button id="auth-toggle" class="btn-secondary"><i class="fas fa-user"></i> Login / Signup</button>
+                <button id="theme-toggle"><i class="fas fa-moon"></i></button>
+            </div>
+        </aside>
+        <main class="main-content">
+            <section id="dashboard" class="section active">
+                <h1>Dashboard</h1>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <i class="fas fa-list-ul"></i>
+                        <div>
+                            <h3 id="total-tasks">0</h3>
+                            <p>Total Tasks</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <h3 id="completed-tasks">0</h3>
+                            <p>Completed</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h3 id="pending-tasks">0</h3>
+                            <p>Pending</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div>
+                            <h3 id="overdue-tasks">0</h3>
+                            <p>Overdue</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="progress-container">
+                    <h2>Overall Progress</h2>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                    <p id="progress-text">0% Complete</p>
+                </div>
+                <div class="notification-history">
+                    <h2>Notification History</h2>
+                    <ul id="notification-history-list" class="notification-history-list"></ul>
+                </div>
+            </section>
+            <section id="calendar" class="section">
+                <h1>Calendar</h1>
+                <div class="calendar-container">
+                    <div class="calendar-header">
+                        <button id="prev-month"><i class="fas fa-chevron-left"></i></button>
+                        <h2 id="month-year"></h2>
+                        <button id="next-month"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                    <div class="calendar-grid">
+                        <div class="day-name">Sun</div>
+                        <div class="day-name">Mon</div>
+                        <div class="day-name">Tue</div>
+                        <div class="day-name">Wed</div>
+                        <div class="day-name">Thu</div>
+                        <div class="day-name">Fri</div>
+                        <div class="day-name">Sat</div>
+                    </div>
+                    <div class="calendar-days" id="calendar-days"></div>
+                </div>
+                <div id="day-tasks" class="day-tasks"></div>
+            </section>
+            <section id="tasks" class="section">
+                <h1>Task Manager</h1>
+                <div class="task-controls">
+                    <button id="add-task-btn" class="btn-primary"><i class="fas fa-plus"></i> Add Task</button>
+                    <div class="search-filter">
+                        <input type="text" id="search-input" placeholder="Search tasks...">
+                        <select id="filter-priority">
+                            <option value="">All Priorities</option>
+                            <option value="High">High</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low">Low</option>
+                        </select>
+                        <!-- ADD THIS CODE - Status Filter -->
+                        <select id="filter-status">
+                            <option value="">All Statuses</option>
+                            <option value="Pending">Pending</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="Completed">Completed</option>
+                        </select>
+                        <!-- END ADD -->
+                        <select id="sort-by">
+                            <option value="deadline">Sort by Deadline</option>
+                            <option value="priority">Sort by Priority</option>
+                            <option value="title">Sort by Title</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="task-tracker" class="task-tracker"></div>
+                <div class="email-settings">
+                    <label for="reminder-email">Email for reminders:</label>
+                    <input type="email" id="reminder-email" placeholder="your.email@example.com">
+                    <small>Optional: receive reminders via your email client (mailto link).</small>
+                </div>
+                <div id="task-list" class="task-list"></div>
+            </section>
+            <section id="progress" class="section">
+                <h1>Progress Tracker</h1>
+                <div class="progress-chart">
+                    <canvas id="progress-canvas"></canvas>
+                </div>
+                <div class="subject-progress">
+                    <h2>Progress by Subject</h2>
+                    <div id="subject-bars"></div>
+                </div>
+            </section>
+            <section id="about" class="section">
+                <h1>About Us</h1>
+                <p>Smart Study Planner is built for students who need a smart, intuitive study task management tool. Track your assignments, deadlines, and progress, all in one place.</p>
+                <p>Version 1.0 &bull; Created with 💜 for efficient learning and time management.</p>
+            </section>
+            <section id="contact" class="section">
+                <h1>Contact</h1>
+                <p>Need help or have feedback? Reach out to us anytime.</p>
+                <p><strong>Email:</strong> support@smartstudyplanner.com</p>
+                <p><strong>Phone:</strong> +91 9876543210</p>
+                <p><strong>Address:</strong> Bangalore, India</p>
+            </section>
+        </main>
+    </div>
 
-<div class="auth-container">
-  <div class="auth-card">
+    <!-- Modals -->
+    <div id="auth-overlay" class="auth-overlay show">
+        <div class="auth-container">
+            <h2>Smart Study Planner</h2>
+            <p>Login to access your tasks and progress tracking.</p>
+            <button id="show-login" class="btn-primary">Login</button>
+            <button id="show-signup" class="btn-secondary">Signup</button>
+        </div>
+    </div>
 
-    <h2 id="formTitle">Login</h2>
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" data-modal="login-modal">&times;</span>
+            <h2>Login</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <button type="submit" class="btn-primary">Login</button>
+            </form>
+            <p>Don't have an account? <a href="#" id="switch-to-signup">Sign up</a></p>
+        </div>
+    </div>
 
-    <form id="authForm">
-      <div id="nameField" class="hidden">
-        <input type="text" id="name" placeholder="Full Name">
-        <small class="error" id="nameError"></small>
-      </div>
+    <div id="signup-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" data-modal="signup-modal">&times;</span>
+            <h2>Signup</h2>
+            <form id="signup-form">
+                <div class="form-group">
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" required>
+                </div>
+                <button type="submit" class="btn-primary">Create Account</button>
+            </form>
+            <p>Already have an account? <a href="#" id="switch-to-login">Login</a></p>
+        </div>
+    </div>
 
-      <input type="email" id="email" placeholder="Email">
-      <small class="error" id="emailError"></small>
+    <div id="task-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modal-title">Add Task</h2>
+            <form id="task-form">
+                <div class="form-group">
+                    <label for="task-title">Title</label>
+                    <input type="text" id="task-title" required>
+                </div>
+                <div class="form-group">
+                    <label for="task-subject">Subject</label>
+                    <input type="text" id="task-subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="task-deadline">Deadline</label>
+                    <input type="datetime-local" id="task-deadline" required>
+                </div>
+                <div class="form-group">
+                    <label for="task-priority">Priority</label>
+                    <select id="task-priority">
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                    </select>
+                </div>
+                <!-- ADD THIS CODE - Task Status Field -->
+                <div class="form-group">
+                    <label for="task-status">Status</label>
+                    <select id="task-status">
+                        <option value="Pending">Pending</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+                </div>
+                <!-- END ADD -->
+                <button type="submit" class="btn-primary">Save Task</button>
+            </form>
+        </div>
+    </div>
 
-      <input type="password" id="password" placeholder="Password">
-      <small class="error" id="passwordError"></small>
-
-      <div id="confirmField" class="hidden">
-        <input type="password" id="confirmPassword" placeholder="Confirm Password">
-        <small class="error" id="confirmError"></small>
-      </div>
-
-      <button type="submit">Continue</button>
-    </form>
-
-    <p id="toggleText">
-      Don’t have an account? <span id="toggleBtn">Register</span>
-    </p>
-
-  </div>
-</div>
-
-<script src="app.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
