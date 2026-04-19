@@ -1,0 +1,867 @@
+/* Smart Study Planner - CSS */
+
+:root {
+    --primary-color: #6366f1;
+    --secondary-color: #8b5cf6;
+    --success-color: #10b981;
+    --warning-color: #f59e0b;
+    --danger-color: #ef4444;
+    --background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    --glass-bg: rgba(15, 23, 42, 0.8);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    --border-radius: 12px;
+    --transition: all 0.3s ease;
+}
+
+[data-theme="dark"] {
+    --background: linear-gradient(135deg, #020617 0%, #0f172a 100%);
+    --glass-bg: rgba(15, 23, 42, 0.9);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* UPDATE THIS CSS - Better Study Background */
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)),
+        url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+    /* END UPDATE */
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 280px;
+    /* UPDATE THIS CSS - Dark Theme Glassmorphism */
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    /* END UPDATE */
+    padding: 2rem 0;
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 100;
+}
+
+.sidebar-header {
+    padding: 0 2rem 2rem;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.sidebar-header h2 {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.sidebar-nav {
+    padding: 2rem 0;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: var(--transition);
+    border-left: 3px solid transparent;
+}
+
+.nav-link:hover, .nav-link.active {
+    /* UPDATE THIS CSS - Enhanced Active/Active States */
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--text-primary);
+    border-left-color: var(--primary-color);
+    box-shadow: 0 0 15px rgba(79, 70, 229, 0.3);
+    transform: translateX(5px);
+    /* END UPDATE */
+}
+
+/* ADD THIS CODE - Reminder Bell Styles */
+.reminder-bell {
+    position: relative;
+}
+
+.reminder-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: var(--danger-color);
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: bold;
+}
+/* END ADD */
+
+.sidebar-footer {
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+}
+
+#theme-toggle {
+    /* UPDATE THIS CSS - Dark Theme Toggle */
+    background: rgba(15, 23, 42, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    padding: 0.75rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 1.1rem;
+    /* END UPDATE */
+}
+
+#theme-toggle:hover {
+    /* UPDATE THIS CSS - Enhanced Theme Toggle Hover */
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    /* END UPDATE */
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    margin-left: 280px;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.section {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.section.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+    /* UPDATE THIS CSS - Improved Heading Colors */
+    background: linear-gradient(45deg, #ffffff, #e0e7ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    /* END UPDATE */
+}
+
+/* Dashboard */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.stat-card {
+    /* UPDATE THIS CSS - Dark Theme Cards */
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    transition: var(--transition);
+    /* END UPDATE */
+}
+
+.stat-card:hover {
+    /* UPDATE THIS CSS - Enhanced Hover Effect */
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    /* END UPDATE */
+}
+
+.stat-card i {
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+.stat-card h3 {
+    font-size: 2rem;
+    margin-bottom: 0.25rem;
+}
+
+.stat-card p {
+    color: var(--text-secondary);
+}
+
+.progress-container {
+    /* UPDATE THIS CSS - Dark Theme Progress Container */
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    /* END UPDATE */
+}
+
+.progress-bar {
+    width: 100%;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 1rem 0;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--success-color), var(--primary-color));
+    width: 0%;
+    transition: width 0.5s ease;
+}
+
+/* ADD THIS CODE - Progress Animation */
+.progress-fill.animate-progress {
+    animation: progressAnimation 1s ease-out;
+}
+
+@keyframes progressAnimation {
+    0% { width: 0%; }
+}
+/* END ADD */
+
+/* Calendar */
+.calendar-container {
+    /* UPDATE THIS CSS - Dark Theme Calendar */
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    /* END UPDATE */
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.calendar-header button {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.calendar-header button:hover {
+    background: var(--secondary-color);
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.day-name {
+    text-align: center;
+    font-weight: bold;
+    color: var(--text-secondary);
+    padding: 0.5rem;
+}
+
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.5rem;
+}
+
+.day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+}
+
+.day:hover {
+    background: var(--glass-bg);
+}
+
+.day.today {
+    background: var(--primary-color);
+    color: white;
+}
+
+.day.has-tasks::after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    width: 6px;
+    height: 6px;
+    background: var(--warning-color);
+    border-radius: 50%;
+}
+
+.day-tasks {
+    /* UPDATE THIS CSS - Dark Theme Day Tasks */
+    margin-top: 2rem;
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    display: none;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    /* END UPDATE */
+}
+
+.day-tasks.show {
+    display: block;
+}
+
+/* Tasks */
+.task-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.btn-primary {
+    /* UPDATE THIS CSS - Enhanced Buttons */
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+    /* END UPDATE */
+}
+
+.btn-primary:hover {
+    /* UPDATE THIS CSS - Enhanced Button Hover */
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(79, 70, 229, 0.4);
+    /* END UPDATE */
+}
+
+.search-filter {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+#search-input, #filter-priority, #sort-by {
+    /* UPDATE THIS CSS - Dark Theme Search Inputs */
+    padding: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    background: rgba(15, 23, 42, 0.6);
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    transition: var(--transition);
+    /* END UPDATE */
+}
+
+/* ADD THIS CSS - Search Input Focus */
+#search-input:focus, #filter-priority:focus, #sort-by:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1);
+}
+/* END ADD */
+
+.task-list {
+    display: grid;
+    gap: 1rem;
+}
+
+.task-tracker {
+    margin-bottom: 1.5rem;
+    background: rgba(15, 23, 42, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+}
+
+.task-tracker .track-item {
+    color: #fff;
+    font-weight: 600;
+}
+
+.task-item {
+    /* UPDATE THIS CSS - Dark Theme Task Cards */
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    transition: var(--transition);
+    margin-bottom: 1rem;
+    /* END UPDATE */
+}
+
+.task-item:hover {
+    /* UPDATE THIS CSS - Enhanced Task Card Hover */
+    transform: translateY(-8px) scale(1.01);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    /* END UPDATE */
+}
+
+.task-header {
+    /* UPDATE THIS CSS - Enhanced Task Header */
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    gap: 1rem;
+    /* END UPDATE */
+}
+
+.task-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.section-image {
+    width: 32px;
+    height: 32px;
+    margin-left: 0.6rem;
+    border-radius: 50%;
+    object-fit: cover;
+    vertical-align: middle;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.task-priority {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+.task-priority.High { background: var(--danger-color); color: white; }
+.task-priority.Medium { background: var(--warning-color); color: white; }
+.task-priority.Low { background: var(--success-color); color: white; }
+
+/* ADD THIS CODE - Task Status Styles */
+.task-status {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+.task-status.Pending { background: var(--danger-color); color: white; }
+.task-status.InProgress { background: var(--warning-color); color: white; }
+.task-status.Completed { background: var(--success-color); color: white; }
+/* END ADD */
+
+.task-details {
+    /* UPDATE THIS CSS - Enhanced Task Details */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    gap: 1rem;
+    /* END UPDATE */
+}
+
+.task-actions {
+    /* UPDATE THIS CSS - Enhanced Task Actions */
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    /* END UPDATE */
+}
+
+.btn-secondary {
+    /* UPDATE THIS CSS - Dark Theme Secondary Buttons */
+    background: rgba(15, 23, 42, 0.6);
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 500;
+    /* END UPDATE */
+}
+
+.btn-secondary:hover {
+    /* UPDATE THIS CSS - Enhanced Secondary Button Hover */
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--text-primary);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    /* END UPDATE */
+}
+
+.btn-danger {
+    /* UPDATE THIS CSS - Enhanced Danger Button */
+    background: linear-gradient(135deg, var(--danger-color), #dc2626);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 500;
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+    /* END UPDATE */
+}
+
+.btn-danger:hover {
+    /* UPDATE THIS CSS - Enhanced Danger Button Hover */
+    background: linear-gradient(135deg, #dc2626, var(--danger-color));
+    transform: translateY(-1px) scale(1.02);
+    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+    /* END UPDATE */
+}
+
+/* Progress */
+.progress-chart {
+    /* UPDATE THIS CSS - Dark Theme Progress Chart */
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    /* END UPDATE */
+}
+
+.subject-progress {
+    /* UPDATE THIS CSS - Dark Theme Subject Progress */
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    /* END UPDATE */
+}
+
+.subject-bar {
+    margin-bottom: 1rem;
+}
+
+.subject-bar h4 {
+    margin-bottom: 0.5rem;
+}
+
+.subject-bar .progress-bar {
+    height: 10px;
+    margin: 0.5rem 0;
+}
+
+.notification-history {
+    margin-top: 2rem;
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+}
+
+.notification-history h2 {
+    margin-bottom: 1rem;
+    color: var(--text-secondary);
+}
+
+.notification-history-list {
+    max-height: 220px;
+    overflow-y: auto;
+    list-style: none;
+    padding-left: 0;
+}
+
+.notification-history-list li {
+    background: rgba(255, 255, 255, 0.05);
+    margin-bottom: 0.5rem;
+    border-radius: 8px;
+    padding: 0.75rem;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+}
+
+.email-settings {
+    margin-bottom: 1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+}
+
+.email-settings label {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.email-settings input {
+    width: auto;
+    min-width: 240px;
+}
+
+.email-settings small {
+    color: #cbd5e1;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+.modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    /* UPDATE THIS CSS - Dark Theme Modal */
+    background: rgba(15, 23, 42, 0.9);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    animation: modalFadeIn 0.3s ease;
+    /* END UPDATE */
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.close {
+    /* UPDATE THIS CSS - Enhanced Close Button */
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: var(--transition);
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    /* END UPDATE */
+}
+
+/* ADD THIS CSS - Close Button Hover */
+.close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+}
+/* END ADD */
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.form-group input, .form-group select {
+    /* UPDATE THIS CSS - Dark Theme Form Inputs */
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    background: rgba(15, 23, 42, 0.6);
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: var(--transition);
+    /* END UPDATE */
+}
+
+/* ADD THIS CSS - Form Input Focus */
+.form-group input:focus, .form-group select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    background: rgba(255, 255, 255, 0.15);
+}
+/* END ADD */
+
+/* Responsive */
+@media (max-width: 768px) {
+    .sidebar {
+        /* UPDATE THIS CSS - Mobile Sidebar */
+        width: 100%;
+        height: auto;
+        position: static;
+        padding: 1rem;
+        /* END UPDATE */
+    }
+    
+    .main-content {
+        margin-left: 0;
+        padding: 1rem;
+    }
+    
+    .container {
+        flex-direction: column;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .task-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .search-filter {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .task-details {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .calendar-grid, .calendar-days {
+        grid-template-columns: repeat(7, 1fr);
+        font-size: 0.8rem;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .modal-content {
+        width: 95%;
+        padding: 1.5rem;
+    }
+}
+
+/* Auth overlay */
+.auth-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+.auth-overlay.show {
+    display: flex;
+}
+
+.auth-container {
+    background: rgba(15, 23, 42, 0.9);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 2rem;
+    width: min(500px, 90%);
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+}
+
+.auth-container h2 {
+    margin-bottom: 0.5rem;
+}
+
+.auth-container p {
+    margin-bottom: 1.5rem;
+    color: var(--text-secondary);
+}
+
+.auth-container .btn-primary, .auth-container .btn-secondary {
+    width: 100%;
+    padding: 0.75rem;
+}
+
+.auth-container .btn-secondary {
+    margin-top: 0.5rem;
+}
