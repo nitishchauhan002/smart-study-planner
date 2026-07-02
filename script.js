@@ -1,6 +1,4 @@
-// Smart Study Planner - JavaScript
 
-// DOM Elements
 const navLinks = document.querySelectorAll('.nav-link');
 const sections = document.querySelectorAll('.section');
 const themeToggle = document.getElementById('theme-toggle');
