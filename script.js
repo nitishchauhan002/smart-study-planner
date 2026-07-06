@@ -28,7 +28,7 @@ const progressFill = document.getElementById('progress-fill');
 const progressText = document.getElementById('progress-text');
 const subjectBars = document.getElementById('subject-bars');
 
-// ADD THIS CODE - Reminder System DOM Elements
+
 const reminderBell = document.getElementById('reminder-bell');
 const reminderCount = document.getElementById('reminder-count');
 const reminderEmailInput = document.getElementById('reminder-email');
