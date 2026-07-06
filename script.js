@@ -97,7 +97,6 @@ function showSection(sectionId) {
     document.querySelector(`[data-section="${sectionId}"]`).classList.add('active');
 }
 
-// Auth flow
 function openModal(modal) {
     modal.classList.add('show');
 }
